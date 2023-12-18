@@ -79,9 +79,7 @@ class MainWin(QMainWindow, MainWindow):
         self.trayicon.setToolTip("qbwebui推送工具")
         self.context_menu()
         self.trayicon.show()
-        self.trayicon.activated[QSystemTrayIcon.ActivationReason].connect(
-            self.iconActivated
-        )
+        self.trayicon.activated.connect(self.iconActivated)
 
     def setup_thread(self):
         self._thread = QThread(self)
