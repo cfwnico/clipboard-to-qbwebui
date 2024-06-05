@@ -79,9 +79,7 @@ class MainWin(QMainWindow, MainWindow):
         self.trayicon.setToolTip("qbwebui推送工具")
         self.context_menu()
         self.trayicon.show()
-        self.trayicon.activated[QSystemTrayIcon.ActivationReason].connect(
-            self.iconActivated
-        )
+        self.trayicon.activated.connect(self.iconActivated)
 
     def setup_thread(self):
         self._thread = QThread(self)
@@ -118,6 +116,7 @@ class MainWin(QMainWindow, MainWindow):
 
     def auto_check(self):
         self.current_link = self.clipboard.text()
+        self.current_link = self.current_link.replace("\n\n", "\n")
         if self.current_link == self.old_link:
             return
         if len(self.current_link) > 20:
